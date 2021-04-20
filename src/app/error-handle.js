@@ -15,8 +15,11 @@ const errorHandler = (error,ctx) =>{
 			message = '用户名不存在';break;
 		case errorTypes.WRONG_PASSWORD:
 			status = 400;
-			message = '密码错误';break;	
-		default:
+			message = '密码错误';break;
+	  case errorTypes.UNAUTHORIZATION:
+		  status = 401;
+		  message = 'token无效或过期';break;
+	  default:
 			status = 404;
 			message = '|NOT FOUND|';
 	}
