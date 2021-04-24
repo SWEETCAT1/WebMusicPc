@@ -24,20 +24,18 @@ const verifyLogin = async (ctx,next)=>{
   }
 
   ctx.user = user
-
-
-
   await next()
 }
 
 const verifyAuth = async(ctx,next)=>{
-  // console.log("验证授权的middware");
+
+	if(!ctx.headers.authorization){
+		return ctx.app.emit('error',new Error(error_types.UNAUTHORIZATION),ctx)
+	}
   const authorization = ctx.headers.authorization
 	//获取token
 	const token = authorization.replace('Bearer ','')
 	//验证token
-
-
 	try {
 		ctx.user = jwt.verify(token, PUBLIC_KEY, {
 			alignContent: ["RSA256"]
