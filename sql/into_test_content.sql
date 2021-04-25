@@ -13,3 +13,6 @@ select moments.id,moments.content,moments.createAt,moments.updateAt,
     from moments
     left join users on moments.user_id = users.id
     limit 2,6;
+
+update moments set content = ? where id=? and user_id=?;
+delete from moments where id=4;

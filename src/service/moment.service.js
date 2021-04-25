@@ -28,7 +28,17 @@ class MomentService {
     return result
   }
   //删除动态
-  //
+  async delMoment(momentId){
+    const statement = `delete from moments where id=?;`
+    const [result] = await connection.execute(statement,[momentId])
+    return result
+  }
+  //修改动态
+  async alterMoment(userId,momentId,content){
+    const statement = `update moments set content = ? where id=? and user_id=?;`
+    const [result] = await connection.execute(statement,[content,momentId,userId])
+    return result
+  }
 }
 
 module.exports = new MomentService()

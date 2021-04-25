@@ -46,6 +46,12 @@ const verifyAuth = async(ctx,next)=>{
 	}
 }
 
+const verifyPermission = async(ctx,next) => {
+	const {userid} = ctx.user
+	//验证是否管理员
+	
+	await next()
+}
 
 module.exports = {
   verifyLogin,

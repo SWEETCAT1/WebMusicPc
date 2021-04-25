@@ -2,6 +2,7 @@
 
 create schema web_music charset utf8;
 use web_music;
+
 create table if not exists `users`
 (
 	id int auto_increment
@@ -24,3 +25,15 @@ create table if not exists `moments`
 	foreign key (user_id) references users (id)
 );
 
+create table if not exists `comment`
+(
+    id int primary key auto_increment,
+    content varchar(1000) not null ,
+    moment_id int not null ,
+    user_id int not null ,
+    comment_id int default null,
+
+    foreign key (moment_id) references moments(id) on delete cascade on update cascade ,
+    foreign key (user_id) references users(id) on delete cascade on update cascade ,
+    foreign key (comment_id) references comment(id) on delete cascade on update cascade
+);
