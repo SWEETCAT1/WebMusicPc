@@ -16,3 +16,9 @@ select moments.id,moments.content,moments.createAt,moments.updateAt,
 
 update moments set content = ? where id=? and user_id=?;
 delete from moments where id=4;
+
+insert into comment(moment_id, content, user_id) values(?,?,?);
+
+select user_id from comment where comment.user_id=? and comment.comment_id=?;
+update comment set content=? where comment_id=?;
+delete from comment where id=2;

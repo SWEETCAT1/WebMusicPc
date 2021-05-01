@@ -20,7 +20,7 @@ class MomentController {
 	}
 	//获取多个动态详情
 	async list(ctx,next){
-		console.log(ctx);
+		// console.log(ctx);
 		const {offset,size} = ctx.query
 		ctx.body = await momentService.getMomentList(offset,size)
 	}
@@ -28,13 +28,13 @@ class MomentController {
 	async alter(ctx,next){
 		const {userId,momentId,content} = ctx.request.body
 		ctx.body = await momentService.alterMoment(userId,momentId,content)
-		console.log(ctx.request);
+		// console.log(ctx.request);
 	}
 	//删除指定的动态
 	async remove(ctx,next){
 		const {momentId} = ctx.params
 		ctx.body = await momentService.delMoment(momentId)
-		console.log(ctx.request);
+		// console.log(ctx.request);
 	}
 
 }

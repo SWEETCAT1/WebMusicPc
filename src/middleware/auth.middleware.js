@@ -3,6 +3,7 @@ const service = require('../service/user.service')
 const md5password = require('../utils/password-handle')
 const jwt = require('jsonwebtoken')
 const {PUBLIC_KEY} = require("../app/config")
+const authService = require("../service/auth.service")
 
 const verifyLogin = async (ctx,next)=>{
   const {name,password} = ctx.request.body
@@ -47,13 +48,22 @@ const verifyAuth = async(ctx,next)=>{
 }
 
 const verifyPermission = async(ctx,next) => {
-	const {userid} = ctx.user
-	//验证是否管理员
-	
-	await next()
+	const {id} = ctx.user
+	//验证是否有权限修改评论
+	const {commentId} = ctx.request.body
+	const [res] = await authService.authPermission(id,commentId)
+	console.log(res);
+	if(res){
+		await next()
+	} else {
+		ctx.body = '没有权限修改'
+	}
+
+
 }
 
 module.exports = {
   verifyLogin,
-  verifyAuth
+  verifyAuth,
+	verifyPermission
 }

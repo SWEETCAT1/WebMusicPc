@@ -8,6 +8,14 @@ class AuthService {
     return result.length===0?0:1
 
   }
+
+  async authPermission(userId,commentId){
+    const statement = `select user_id from comment where user_id=? and comment_id=?;`
+    const [res] = await connection.execute(statement,[userId,commentId])
+    
+    return res
+    
+  }
 }
 
 module.exports = new AuthService()

@@ -32,6 +32,8 @@ create table if not exists `comment`
     moment_id int not null ,
     user_id int not null ,
     comment_id int default null,
+    createAt timestamp default current_timestamp ,
+	updateAt timestamp default current_timestamp on update current_timestamp,
 
     foreign key (moment_id) references moments(id) on delete cascade on update cascade ,
     foreign key (user_id) references users(id) on delete cascade on update cascade ,
